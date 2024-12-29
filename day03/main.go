@@ -5,6 +5,7 @@ import (
 	"day03/solution"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -14,7 +15,12 @@ func main() {
 		return
 	}
 
-	total := 0
+	var (
+		part1Total = 0
+		part2Total = 0
+	)
+
+	var allLines strings.Builder
 	r := bufio.NewReader(f)
 	for {
 		line, err := r.ReadString('\n')
@@ -22,7 +28,7 @@ func main() {
 			break
 		}
 
-		total += solution.SumOfMultiplication(line)
+		allLines.WriteString(line)
 	}
 
 	err = f.Close()
@@ -30,5 +36,12 @@ func main() {
 		return
 	}
 
-	fmt.Printf("part 1: %d", total)
+	allMul := solution.ExtractMultiplication(allLines.String())
+	part1Total += solution.SumOfMultiplication(allMul)
+
+	allMul = solution.ExtractMultiplicationWithCondition(allLines.String())
+	part2Total += solution.SumOfMultiplication(allMul)
+
+	fmt.Printf("part 1: %d\n", part1Total)
+	fmt.Printf("part 2: %d\n", part2Total)
 }
