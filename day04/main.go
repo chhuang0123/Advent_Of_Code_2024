@@ -33,4 +33,5 @@ func main() {
 	}
 
 	fmt.Printf("part 1: %d\n", solution.CheckAllXmas(wordSearch))
+	fmt.Printf("part 2: %d\n", solution.CheckAllCrossMas(wordSearch))
 }

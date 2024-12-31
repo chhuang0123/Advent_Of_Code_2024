@@ -114,3 +114,32 @@ func TestCheckAllXmas(t *testing.T) {
 		})
 	}
 }
+
+func TestCheckAllCrossMas(t *testing.T) {
+	var tests = []struct {
+		input [][]string
+		want  int
+	}{
+		{[][]string{
+			{".", "M", ".", "S", ".", ".", ".", ".", ".", "."},
+			{".", ".", "A", ".", ".", "M", "S", "M", "S", "."},
+			{".", "M", ".", "S", ".", "M", "A", "A", ".", "."},
+			{".", ".", "A", ".", "A", "S", "M", "S", "M", "."},
+			{".", "M", ".", "S", ".", "M", ".", ".", ".", "."},
+			{".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+			{"S", ".", "S", ".", "S", ".", "S", ".", "S", "."},
+			{".", "A", ".", "A", ".", "A", ".", "A", ".", "."},
+			{"M", ".", "M", ".", "M", ".", "M", ".", "M", "."},
+			{".", ".", ".", ".", ".", ".", ".", ".", ".", "."}},
+			9},
+	}
+
+	for _, tt := range tests {
+		t.Run("get all X-MAS", func(t *testing.T) {
+			got := CheckAllCrossMas(tt.input)
+			if got != tt.want {
+				t.Errorf("%v: got: %v, but want: %v", tt.input, got, tt.want)
+			}
+		})
+	}
+}

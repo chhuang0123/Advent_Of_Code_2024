@@ -86,3 +86,31 @@ func CheckAllXmas(arr [][]string) (result int) {
 
 	return result
 }
+
+func CheckAllCrossMas(arr [][]string) (result int) {
+	rowCount := len(arr)
+	columnCount := len(arr[0])
+	for i := 0; i < rowCount; i++ {
+		for j := 0; j < columnCount; j++ {
+			if arr[i][j] == "A" {
+				result += CheckCrossMas(arr, i, j)
+			}
+		}
+	}
+
+	return result
+}
+
+func CheckCrossMas(arr [][]string, i int, j int) (result int) {
+	condition1 := (getChar(arr, i, j, 1, 1) == "M" && getChar(arr, i, j, -1, -1) == "S") ||
+		(getChar(arr, i, j, 1, 1) == "S" && getChar(arr, i, j, -1, -1) == "M")
+
+	condition2 := (getChar(arr, i, j, 1, -1) == "M" && getChar(arr, i, j, -1, 1) == "S") ||
+		(getChar(arr, i, j, 1, -1) == "S" && getChar(arr, i, j, -1, 1) == "M")
+
+	if condition1 && condition2 {
+		result++
+	}
+
+	return result
+}
