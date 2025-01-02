@@ -5,6 +5,7 @@ import (
 	"day05/solution"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -15,7 +16,7 @@ func main() {
 		return
 	}
 
-	rules := []string{}
+	var rules []string
 	part1Count := 0
 	r := bufio.NewReader(f)
 	for {
@@ -27,10 +28,13 @@ func main() {
 		if strings.Index(line, "|") != -1 {
 			rules = append(rules, strings.Trim(line, "\n"))
 		} else if strings.Index(line, ",") != -1 {
-			result, _ := solution.ValidateUpdate(rules, solution.ParseUpdate(line))
-			part1Count += result
+			update := strings.Split(strings.Trim(line, "\n"), ",")
+			if solution.ValidateUpdate(rules, update) {
+				if center, err := strconv.Atoi(update[len(update)/2]); err == nil {
+					part1Count += center
+				}
+			}
 		}
-
 	}
 
 	err = f.Close()

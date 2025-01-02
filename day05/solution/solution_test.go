@@ -1,19 +1,8 @@
 package solution
 
 import (
-	"slices"
 	"testing"
 )
-
-func TestParseUpdate(t *testing.T) {
-	input := "75,47,61,53,29"
-	got := ParseUpdate(input)
-	want := []string{"75", "47", "61", "53", "29"}
-
-	if !slices.Equal(got, want) {
-		t.Errorf("got: %v, but want %v", got, want)
-	}
-}
 
 func TestTestValidateUpdate(t *testing.T) {
 	rules := []string{"47|53",
@@ -41,61 +30,55 @@ func TestTestValidateUpdate(t *testing.T) {
 
 	t.Run("true cases", func(t *testing.T) {
 		input := []string{"75", "47", "61", "53", "29"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 61
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != true {
+			t.Errorf("got: %v, but want %v", got, true)
 		}
 	})
 
 	t.Run("true cases", func(t *testing.T) {
 		input := []string{"97", "61", "53", "29", "13"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 53
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != true {
+			t.Errorf("got: %v, but want %v", got, true)
 		}
 	})
 
 	t.Run("true cases", func(t *testing.T) {
 		input := []string{"75", "29", "13"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 29
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != true {
+			t.Errorf("got: %v, but want %v", got, true)
 		}
 	})
 
 	t.Run("false cases", func(t *testing.T) {
 		input := []string{"75", "97", "47", "61", "53"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 0
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != false {
+			t.Errorf("got: %v, but want %v", got, false)
 		}
 	})
 
 	t.Run("false cases", func(t *testing.T) {
 		input := []string{"61", "13", "29"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 0
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != false {
+			t.Errorf("got: %v, but want %v", got, false)
 		}
 	})
 
 	t.Run("false cases", func(t *testing.T) {
 		input := []string{"97", "13", "75", "29", "47"}
-		got, _ := ValidateUpdate(rules, input)
-		want := 0
+		got := ValidateUpdate(rules, input)
 
-		if got != want {
-			t.Errorf("got: %v, but want %v", got, want)
+		if got != false {
+			t.Errorf("got: %v, but want %v", got, false)
 		}
 	})
 }
