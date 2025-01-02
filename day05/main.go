@@ -17,7 +17,7 @@ func main() {
 	}
 
 	var rules []string
-	part1Count := 0
+	part1Count, part2Count := 0, 0
 	r := bufio.NewReader(f)
 	for {
 		line, err := r.ReadString('\n')
@@ -33,6 +33,11 @@ func main() {
 				if center, err := strconv.Atoi(update[len(update)/2]); err == nil {
 					part1Count += center
 				}
+			} else {
+				newUpdate := solution.GetCorrectOrderingUpdate(rules, update)
+				if center, err := strconv.Atoi(newUpdate[len(newUpdate)/2]); err == nil {
+					part2Count += center
+				}
 			}
 		}
 	}
@@ -43,4 +48,5 @@ func main() {
 	}
 
 	fmt.Printf("part 1: %d\n", part1Count)
+	fmt.Printf("part 2: %d\n", part2Count)
 }
